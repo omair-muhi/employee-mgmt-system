@@ -31,3 +31,10 @@ VALUES("Analyst", 57899.99, (SELECT id from department WHERE name="Marketing"));
 
 INSERT INTO role(title, salary, department_id)
 VALUES("Sales Engineer", 76699.88, (SELECT id from department WHERE name="Sales"));
+
+/* Insert some records into employee table */
+INSERT INTO employee(first_name, last_name, role_id)
+VALUES("Jane", "Doe", (SELECT id from role WHERE title="Sales Engineer"));
+
+INSERT INTO employee(first_name, last_name, role_id)
+VALUES("Mary", "Twain", (SELECT id from role WHERE title="Analyst"));
