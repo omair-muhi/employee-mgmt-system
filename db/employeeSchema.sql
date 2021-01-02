@@ -3,26 +3,26 @@ CREATE database employee_DB;
 
 USE employee_DB;
 
-CREATE TABLE employee_dept (
-    deptId INT NOT NULL AUTO_INCREMENT,
-    employee_name VARCHAR(30) NOT NULL,
-    PRIMARY KEY(deptId)
+CREATE TABLE department (
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(30) NOT NULL,
+    PRIMARY KEY(id)
 );
-CREATE TABLE employee_role (
-    roleId INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE role (
+    id INT NOT NULL AUTO_INCREMENT,
     title VARCHAR(30) NOT NULL,
     salary DECIMAL(10,4) NULL,
-    deptId INT,
-    PRIMARY KEY(roleId),
-    FOREIGN KEY(deptId) REFERENCES employee_dept(deptId)
+    department_id INT,
+    PRIMARY KEY(id),
+    FOREIGN KEY(department_id) REFERENCES department(id)
 );
 CREATE TABLE employee (
-    employeeId INT NOT NULL AUTO_INCREMENT,
+    id INT NOT NULL AUTO_INCREMENT,
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(30) NOT NULL,
-    managerId INT,
-    roleId INT,
-    PRIMARY KEY(employeeId),
-    FOREIGN KEY(roleId) REFERENCES employee_role(roleId),
-    FOREIGN KEY(managerId) REFERENCES employee(employeeId)
+    role_id INT,
+    manager_id INT,
+    PRIMARY KEY(id),
+    FOREIGN KEY(role_id) REFERENCES role(id),
+    FOREIGN KEY(manager_id) REFERENCES employee(id)
 );
