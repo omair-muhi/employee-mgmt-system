@@ -110,7 +110,40 @@ class employeeDbConnection {
             }
         );
     }
+    addReportingEmployee(firstName, lastName, title, mgrFirstName, mgrLastName) {
+        if ((mgrFirstName == null) || (mgrLastName == null)) {
+            console.log("Please provide manager first and last name.");
+            return;
+        }
+        console.log(`Adding ${firstName} ${lastName} employee...\n`);
+    }
+    addNonReportingEmployee(firstName, lastName, title) {
+        console.log(`Adding ${lastName},${firstName} employee...\n`);
+        // query role_id by title
+        this.connection.query('SELECT id FROM role WHERE ?', {
+            title: title
+        }, (err, res) => {
+            if (err) throw err;
+            // save role id
+            const roleId = res[0].id;
+            // second nested query for inserting new employee
+            const query = this.connection.query(
+                'INSERT INTO employee SET ?', {
+                    first_name: firstName,
+                    last_name: lastName,
+                    role_id: roleId
+                },
+                (err, res) => {
+                    if (err) throw err;
+                    console.log(`${res.affectedRows} employee inserted!\n`);
+                    this.connection.end();
+                }
+            );
+            // logs the actual query being run
+            console.log(query.sql);
+        });
+    }
 }
 
 const employeeDb = new employeeDbConnection();
-employeeDb.deleteRole("Engineer IV");
+employeeDb.addNonReportingEmployee("Little", "Coop", "Intern");
