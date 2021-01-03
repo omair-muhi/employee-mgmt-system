@@ -44,7 +44,7 @@ class employeeDbConnection {
         });
     }
     addDepartment(name) {
-        console.log('Adding a new deparment...\n');
+        console.log(`Adding ${name} department...\n`);
         const query = this.connection.query(
             'INSERT INTO department SET ?', {
                 name: name,
@@ -57,8 +57,21 @@ class employeeDbConnection {
         // logs the actual query being run
         console.log(query.sql);
     }
+    deleteDeparment(name) {
+        console.log(`Deleting ${name} deparment...\n`);
+        this.connection.query(
+            'DELETE FROM department WHERE ?', {
+                name: name,
+            },
+            (err, res) => {
+                if (err) throw err;
+                console.log(`${res.affectedRows} department deleted!\n`);
+            }
+        );
+    }
 }
 
 const employeeDb = new employeeDbConnection();
 employeeDb.readDepartmentTableAll();
-employeeDb.addDepartment("Finance");
+// employeeDb.addDepartment("Finance");
+employeeDb.deleteDeparment("Finance");
