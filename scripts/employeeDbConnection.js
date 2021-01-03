@@ -43,7 +43,22 @@ class employeeDbConnection {
             this.connection.end();
         });
     }
+    addDepartment(name) {
+        console.log('Adding a new deparment...\n');
+        const query = this.connection.query(
+            'INSERT INTO department SET ?', {
+                name: name,
+            },
+            (err, res) => {
+                if (err) throw err;
+                console.log(`${res.affectedRows} department inserted!\n`);
+            }
+        );
+        // logs the actual query being run
+        console.log(query.sql);
+    }
 }
 
 const employeeDb = new employeeDbConnection();
 employeeDb.readDepartmentTableAll();
+employeeDb.addDepartment("Finance");
