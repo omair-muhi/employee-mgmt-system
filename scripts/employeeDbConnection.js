@@ -27,32 +27,6 @@ class employeeDbConnection {
             this.connection.end();
         });
     }
-    addDepartment(name) {
-        console.log(`Adding ${name} department...\n`);
-        const query = this.connection.query(
-            'INSERT INTO department SET ?', {
-                name: name
-            },
-            (err, res) => {
-                if (err) throw err;
-                console.log(`${res.affectedRows} department inserted!\n`);
-            }
-        );
-        // logs the actual query being run
-        console.log(query.sql);
-    }
-    deleteDeparment(name) {
-        console.log(`Deleting ${name} deparment...\n`);
-        this.connection.query(
-            'DELETE FROM department WHERE ?', {
-                name: name,
-            },
-            (err, res) => {
-                if (err) throw err;
-                console.log(`${res.affectedRows} department deleted!\n`);
-            }
-        );
-    }
     readRoleTableAll() {
         this.connection.query('SELECT * FROM role', (err, res) => {
             if (err) throw err;
@@ -68,6 +42,34 @@ class employeeDbConnection {
             console.log(res);
             this.connection.end();
         });
+    }
+    addDepartment(name) {
+        console.log(`Adding ${name} department...\n`);
+        const query = this.connection.query(
+            'INSERT INTO department SET ?', {
+                name: name
+            },
+            (err, res) => {
+                if (err) throw err;
+                console.log(`${res.affectedRows} department inserted!\n`);
+                this.connection.end();
+            }
+        );
+        // logs the actual query being run
+        console.log(query.sql);
+    }
+    deleteDeparment(name) {
+        console.log(`Deleting ${name} deparment...\n`);
+        this.connection.query(
+            'DELETE FROM department WHERE ?', {
+                name: name,
+            },
+            (err, res) => {
+                if (err) throw err;
+                console.log(`${res.affectedRows} department deleted!\n`);
+                this.connection.end();
+            }
+        );
     }
     addRole(title, salary, departmentName) {
         console.log(`Adding ${title} role...\n`);
@@ -95,8 +97,20 @@ class employeeDbConnection {
             console.log(query.sql);
         });
     }
+    deleteRole(title) {
+        console.log(`Deleting ${title} role...\n`);
+        this.connection.query(
+            'DELETE FROM role WHERE ?', {
+                title: title,
+            },
+            (err, res) => {
+                if (err) throw err;
+                console.log(`${res.affectedRows} role(s) deleted!\n`);
+                this.connection.end();
+            }
+        );
+    }
 }
 
 const employeeDb = new employeeDbConnection();
-// employeeDb.readDepartmentTableAll();
-employeeDb.addRole("Engineer IV", 106699.77, "Engineering");
+employeeDb.deleteRole("Engineer IV");
