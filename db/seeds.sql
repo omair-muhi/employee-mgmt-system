@@ -38,3 +38,17 @@ VALUES("Jane", "Doe", (SELECT id from role WHERE title="Sales Engineer"));
 
 INSERT INTO employee(first_name, last_name, role_id)
 VALUES("Mary", "Twain", (SELECT id from role WHERE title="Analyst"));
+
+INSERT INTO employee(first_name, last_name, role_id)
+VALUES("John", "Doe", (SELECT id from role WHERE title="Engineering Manager"));
+
+SELECT @managerId:=id FROM employee WHERE first_name="John" AND last_name="Doe";
+
+INSERT INTO employee(first_name, last_name, role_id, manager_id)
+VALUES("Johnny", "Lever", (SELECT id from role WHERE title="Engineer I"), @managerId);
+
+INSERT INTO employee(first_name, last_name, role_id, manager_id)
+VALUES("Kate", "Kirsten", (SELECT id from role WHERE title="Engineer II"), @managerId);
+
+INSERT INTO employee(first_name, last_name, role_id, manager_id)
+VALUES("Bob", "Carleton", (SELECT id from role WHERE title="Engineer III"), @managerId);
