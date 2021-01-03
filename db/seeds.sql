@@ -51,4 +51,4 @@ INSERT INTO employee(first_name, last_name, role_id, manager_id)
 VALUES("Kate", "Kirsten", (SELECT id from role WHERE title="Engineer II"), @managerId);
 
 INSERT INTO employee(first_name, last_name, role_id, manager_id)
-VALUES("Bob", "Carleton", (SELECT id from role WHERE title="Engineer III"), @managerId);
+VALUES("Bob", "Carleton", (SELECT id from role WHERE title="Engineer III"), @managerId);SELE
