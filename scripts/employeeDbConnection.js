@@ -27,27 +27,11 @@ class employeeDbConnection {
             this.connection.end();
         });
     }
-    readRoleTableAll() {
-        this.connection.query('SELECT * FROM role', (err, res) => {
-            if (err) throw err;
-            // Log all results of the SELECT statement
-            console.log(res);
-            this.connection.end();
-        });
-    }
-    readEmployeeTableAll() {
-        this.connection.query('SELECT * FROM employee', (err, res) => {
-            if (err) throw err;
-            // Log all results of the SELECT statement
-            console.log(res);
-            this.connection.end();
-        });
-    }
     addDepartment(name) {
         console.log(`Adding ${name} department...\n`);
         const query = this.connection.query(
             'INSERT INTO department SET ?', {
-                name: name,
+                name: name
             },
             (err, res) => {
                 if (err) throw err;
@@ -69,9 +53,50 @@ class employeeDbConnection {
             }
         );
     }
+    readRoleTableAll() {
+        this.connection.query('SELECT * FROM role', (err, res) => {
+            if (err) throw err;
+            // Log all results of the SELECT statement
+            console.log(res);
+            this.connection.end();
+        });
+    }
+    readEmployeeTableAll() {
+        this.connection.query('SELECT * FROM employee', (err, res) => {
+            if (err) throw err;
+            // Log all results of the SELECT statement
+            console.log(res);
+            this.connection.end();
+        });
+    }
+    addRole(title, salary, departmentName) {
+        console.log(`Adding ${title} role...\n`);
+        // query from department ID based on name
+        this.connection.query('SELECT id FROM department WHERE ?', {
+            name: departmentName
+        }, (err, res) => {
+            if (err) throw err;
+            // save department id
+            const departmentId = res[0].id;
+            // second nested query for inserting new role
+            const query = this.connection.query(
+                'INSERT INTO role SET ?', {
+                    title: title,
+                    salary: salary,
+                    department_id: departmentId
+                },
+                (err, res) => {
+                    if (err) throw err;
+                    console.log(`${res.affectedRows} role inserted!\n`);
+                    this.connection.end();
+                }
+            );
+            // logs the actual query being run
+            console.log(query.sql);
+        });
+    }
 }
 
 const employeeDb = new employeeDbConnection();
-employeeDb.readDepartmentTableAll();
-// employeeDb.addDepartment("Finance");
-employeeDb.deleteDeparment("Finance");
+// employeeDb.readDepartmentTableAll();
+employeeDb.addRole("Engineer IV", 106699.77, "Engineering");
