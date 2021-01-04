@@ -200,7 +200,7 @@ class employeeDbConnection {
                     }],
                     (err, res) => {
                         if (err) throw err;
-                        console.log(`${res.affectedRows} emloyee updated!\n`);
+                        console.log(`${res.affectedRows} employee updated!\n`);
                     }
                 );
             }
@@ -227,7 +227,7 @@ class employeeDbConnection {
                     }],
                     (err, res) => {
                         if (err) throw err;
-                        console.log(`${res.affectedRows} emloyee updated!\n`);
+                        console.log(`${res.affectedRows} employee updated!\n`);
                     }
                 );
             }
