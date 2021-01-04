@@ -206,12 +206,38 @@ class employeeDbConnection {
             }
         );
     }
+    updateEmployeeManager(firstName, lastName, newMgrFirstName, newMgrLastName) {
+        this.connection.query('SELECT id FROM employee WHERE ? AND ?', [{
+                    first_name: newMgrFirstName
+                },
+                {
+                    last_name: newMgrLastName
+                }
+            ],
+            (err, res) => {
+                if (err) throw err;
+                const newMgrId = res[0].id;
+                this.connection.query(
+                    'UPDATE employee SET ? WHERE ? AND ?', [{
+                        manager_id: newMgrId
+                    }, {
+                        first_name: firstName
+                    }, {
+                        last_name: lastName
+                    }],
+                    (err, res) => {
+                        if (err) throw err;
+                        console.log(`${res.affectedRows} emloyee updated!\n`);
+                    }
+                );
+            }
+        );
+    }
 }
 
 /**
  * Test-code
  */
 const employeeDb = new employeeDbConnection();
-employeeDb.readEmployeeTableAll();
-employeeDb.updateEmployeeRole("Johnny", "Lever", "Intern");
-employeeDb.connection.end();
+employeeDb.updateEmployeeManager("Mary", "Twain", "Jane", "Doe");
+// employeeDb.connection.end();
