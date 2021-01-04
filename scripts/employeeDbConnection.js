@@ -234,10 +234,4 @@ class employeeDbConnection {
         );
     }
 }
-
-/**
- * Test-code
- */
-const employeeDb = new employeeDbConnection();
-employeeDb.updateEmployeeManager("Mary", "Twain", "Jane", "Doe");
-// employeeDb.connection.end();
+module.exports = employeeDbConnection;
