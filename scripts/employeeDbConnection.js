@@ -183,12 +183,35 @@ class employeeDbConnection {
             }
         );
     }
+    updateEmployeeRole(firstName, lastName, newTitle) {
+        this.connection.query('SELECT id FROM role WHERE ?', {
+                title: newTitle
+            },
+            (err, res) => {
+                if (err) throw err;
+                const newRoleId = res[0].id;
+                this.connection.query(
+                    'UPDATE employee SET ? WHERE ? AND ?', [{
+                        role_id: newRoleId
+                    }, {
+                        first_name: firstName
+                    }, {
+                        last_name: lastName
+                    }],
+                    (err, res) => {
+                        if (err) throw err;
+                        console.log(`${res.affectedRows} emloyee updated!\n`);
+                    }
+                );
+            }
+        );
+    }
 }
 
+/**
+ * Test-code
+ */
 const employeeDb = new employeeDbConnection();
-// employeeDb.readDepartmentTableAll();
-// employeeDb.readRoleTableAll();
 employeeDb.readEmployeeTableAll();
-employeeDb.deleteEmployee("Omair", "Muhi");
-employeeDb.readEmployeeTableAll();
+employeeDb.updateEmployeeRole("Johnny", "Lever", "Intern");
 employeeDb.connection.end();
