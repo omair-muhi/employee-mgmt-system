@@ -4,6 +4,10 @@
  * */
 const mysql = require('mysql');
 class employeeDbConnection {
+    /**
+     * Create connection object and open
+     * DB connection
+     */
     constructor() {
         this.connection = mysql.createConnection({
             host: 'localhost',
@@ -19,6 +23,10 @@ class employeeDbConnection {
             database: 'employee_DB',
         });
     }
+
+    /**
+     * Read all department records
+     */
     readDepartmentTableAll() {
         this.connection.query('SELECT * FROM department', (err, res) => {
             if (err) throw err;
@@ -115,10 +123,41 @@ class employeeDbConnection {
             console.log("Please provide manager first and last name.");
             return;
         }
-        console.log(`Adding ${firstName} ${lastName} employee...\n`);
+        console.log(`Adding ${lastName}, ${firstName} employee...\n`);
+        // query role_id by title
+        this.connection.query('SELECT id FROM role WHERE ?', {
+            title: title
+        }, (err, res) => {
+            if (err) throw err;
+            // save role id
+            const roleId = res[0].id;
+            // nested query to populate manager_id
+            const query = this.connection.query(
+                'SELECT id FROM employee WHERE first_name=? AND last_name=?', [mgrFirstName, mgrLastName],
+                (err, res) => {
+                    if (err) throw err;
+                    // save manager_id
+                    const managerId = res[0].id;
+                    // third nested query for inserting new employee
+                    const query = this.connection.query(
+                        'INSERT INTO employee SET ?', {
+                            first_name: firstName,
+                            last_name: lastName,
+                            role_id: roleId,
+                            manager_id: managerId
+                        },
+                        (err, res) => {
+                            if (err) throw err;
+                            console.log(`${res.affectedRows} employee inserted!\n`);
+                            this.connection.end();
+                        }
+                    );
+                }
+            );
+        });
     }
     addNonReportingEmployee(firstName, lastName, title) {
-        console.log(`Adding ${lastName},${firstName} employee...\n`);
+        console.log(`Adding ${lastName}, ${firstName} employee...\n`);
         // query role_id by title
         this.connection.query('SELECT id FROM role WHERE ?', {
             title: title
@@ -139,11 +178,9 @@ class employeeDbConnection {
                     this.connection.end();
                 }
             );
-            // logs the actual query being run
-            console.log(query.sql);
         });
     }
 }
 
 const employeeDb = new employeeDbConnection();
-employeeDb.addNonReportingEmployee("Little", "Coop", "Intern");
+employeeDb.addReportingEmployee("Omair", "Muhi", "Engineer III", "John", "Doe");
