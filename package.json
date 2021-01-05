@@ -1,25 +1,26 @@
 {
-  "name": "employee-mgmt-system",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/omair-muhi/employee-mgmt-system.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/omair-muhi/employee-mgmt-system/issues"
-  },
-  "homepage": "https://github.com/omair-muhi/employee-mgmt-system#readme",
-  "dependencies": {
-    "console.table": "^0.10.0",
-    "inquirer": "^7.3.3",
-    "mysql": "^2.18.1"
-  }
+    "name": "employee-mgmt-system",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node scripts/index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/omair-muhi/employee-mgmt-system.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/omair-muhi/employee-mgmt-system/issues"
+    },
+    "homepage": "https://github.com/omair-muhi/employee-mgmt-system#readme",
+    "dependencies": {
+        "console.table": "^0.10.0",
+        "inquirer": "^7.3.3",
+        "mysql": "^2.18.1"
+    }
 }
