@@ -117,6 +117,7 @@ const start = () => {
                     });
                     break;
                 case 'View all departments':
+                    employeeDb.readDepartmentTableAll();
                     start();
                     break;
                 case 'View all roles':
