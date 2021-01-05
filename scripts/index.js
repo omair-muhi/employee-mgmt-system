@@ -14,14 +14,18 @@ const start = () => {
                 'Add department',
                 'Add role',
                 'Add employee',
+                new inquirer.Separator(),
                 'View all departments',
                 'View all roles',
                 'View all employees',
+                new inquirer.Separator(),
                 'Delete department',
                 'Delete role',
                 'Delete employee',
+                new inquirer.Separator(),
                 'Update employee role',
                 'Update employee manager',
+                new inquirer.Separator(),
                 'EXIT'
             ],
         })
