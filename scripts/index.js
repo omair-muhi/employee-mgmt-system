@@ -186,7 +186,30 @@ const start = () => {
                     });
                     break;
                 case 'Update employee manager':
-                    start();
+                    inquirer.prompt([{
+                            name: 'first',
+                            type: 'input',
+                            message: 'Enter first name of employee:'
+                        },
+                        {
+                            name: 'last',
+                            type: 'input',
+                            message: 'Enter last name of employee:'
+                        },
+                        {
+                            name: 'mgrFirst',
+                            type: 'input',
+                            message: 'Enter first name of employee\'s new manager:'
+                        },
+                        {
+                            name: 'mgrLast',
+                            type: 'input',
+                            message: 'Enter last name of employee\'s new manager:'
+                        }
+                    ]).then((answer) => {
+                        employeeDb.updateEmployeeManager(answer.first, answer.last, answer.mgrFirst, answer.mgrLast);
+                        start(); // keep app running until user selects EXIT
+                    });
                     break;
                 case 'EXIT':
                 default:
