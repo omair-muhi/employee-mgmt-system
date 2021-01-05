@@ -165,7 +165,25 @@ const start = () => {
                     });
                     break;
                 case 'Update employee role':
-                    start();
+                    inquirer.prompt([{
+                            name: 'first',
+                            type: 'input',
+                            message: 'Enter first name of employee:'
+                        },
+                        {
+                            name: 'last',
+                            type: 'input',
+                            message: 'Enter last name of employee:'
+                        },
+                        {
+                            name: 'title',
+                            type: 'input',
+                            message: 'Enter new title of employee:'
+                        }
+                    ]).then((answer) => {
+                        employeeDb.updateEmployeeRole(answer.first, answer.last, answer.title);
+                        start(); // keep app running until user selects EXIT
+                    });
                     break;
                 case 'Update employee manager':
                     start();
