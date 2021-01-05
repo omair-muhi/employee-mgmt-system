@@ -65,6 +65,35 @@ const start = () => {
                     });
                     break;
                 case 'Add employee w/ manager':
+                    inquirer.prompt([{
+                            name: 'first',
+                            type: 'input',
+                            message: 'Enter first name of new employee:'
+                        },
+                        {
+                            name: 'last',
+                            type: 'input',
+                            message: 'Enter last name of new employee:'
+                        },
+                        {
+                            name: 'title',
+                            type: 'input',
+                            message: 'Enter title of new employee:'
+                        }, {
+                            name: 'mgrFirst',
+                            type: 'input',
+                            message: 'Enter first name of new employee\'s manager:'
+                        },
+                        {
+                            name: 'mgrLast',
+                            type: 'input',
+                            message: 'Enter last name of new employee\'s manager:'
+                        },
+
+                    ]).then((answer) => {
+                        employeeDb.addReportingEmployee(answer.first, answer.last, answer.title, answer.mgrFirst, answer.mgrLast);
+                        start(); // keep app running until user selects EXIT
+                    });
                     break;
                 case 'Add employee w/o manager':
                     inquirer.prompt([{
