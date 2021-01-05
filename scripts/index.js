@@ -149,7 +149,20 @@ const start = () => {
                     });
                     break;
                 case 'Delete employee':
-                    start();
+                    inquirer.prompt([{
+                            name: 'first',
+                            type: 'input',
+                            message: 'Enter first name of employee:'
+                        },
+                        {
+                            name: 'last',
+                            type: 'input',
+                            message: 'Enter last name of employee:'
+                        }
+                    ]).then((answer) => {
+                        employeeDb.deleteEmployee(answer.first, answer.last);
+                        start(); // keep app running until user selects EXIT
+                    });
                     break;
                 case 'Update employee role':
                     start();
