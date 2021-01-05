@@ -137,10 +137,16 @@ const start = () => {
                         employeeDb.deleteDeparment(answer.deptName);
                         start(); // keep app running until user selects EXIT
                     });
-
                     break;
                 case 'Delete role':
-                    start();
+                    inquirer.prompt([{
+                        name: 'title',
+                        type: 'input',
+                        message: 'Enter title of role:'
+                    }]).then((answer) => {
+                        employeeDb.deleteRole(answer.title);
+                        start(); // keep app running until user selects EXIT
+                    });
                     break;
                 case 'Delete employee':
                     start();
