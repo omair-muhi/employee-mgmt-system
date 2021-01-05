@@ -125,6 +125,7 @@ const start = () => {
                     start();
                     break;
                 case 'View all employees':
+                    employeeDb.readEmployeeTableAll();
                     start();
                     break;
                 case 'Delete department':
