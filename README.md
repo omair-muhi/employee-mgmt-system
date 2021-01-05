@@ -12,7 +12,9 @@ This is a CLI-based application that allows users to manage departments, roles a
 ## Usage 
 * To install: `npm install`
 * To run: `npm run start`
-* Screencastify Part-1: https://drive.google.com/file/d/1FOdRjLxPQfpaTeyrMvdPkiQeCvgGRhPp/view
+* Walktrhough video Part-1: https://drive.google.com/file/d/1FOdRjLxPQfpaTeyrMvdPkiQeCvgGRhPp/view
+* Walktrhough video Part-2: https://drive.google.com/file/d/1_Xq2srWuVTjJzouYr3sSNVFpEmhv9ADF/view
+* Walktrhough video Part-3: https://drive.google.com/file/d/1Nbexav9zkQCN9Gqyqn3mm-oHTHi8Fqa-/view
 
 ## Credits
 * UoT FSF Bcamp - this template
