@@ -72,7 +72,7 @@ class employeeDbConnection {
             },
             (err, res) => {
                 if (err) throw err;
-                console.log(`${res.affectedRows} department deleted!\n`);
+                // console.log(`${res.affectedRows} department deleted!\n`);
             }
         );
     }
