@@ -121,6 +121,7 @@ const start = () => {
                     start();
                     break;
                 case 'View all roles':
+                    employeeDb.readRoleTableAll();
                     start();
                     break;
                 case 'View all employees':
