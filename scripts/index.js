@@ -13,7 +13,8 @@ const start = () => {
             choices: [
                 'Add department',
                 'Add role',
-                'Add employee',
+                'Add employee w/ manager',
+                'Add employee w/o manager',
                 new inquirer.Separator(),
                 'View all departments',
                 'View all roles',
@@ -63,8 +64,28 @@ const start = () => {
                         start(); // keep app running until user selects EXIT
                     });
                     break;
-                case 'Add employee':
-                    start();
+                case 'Add employee w/ manager':
+                    break;
+                case 'Add employee w/o manager':
+                    inquirer.prompt([{
+                            name: 'first',
+                            type: 'input',
+                            message: 'Enter first name of new employee:'
+                        },
+                        {
+                            name: 'last',
+                            type: 'input',
+                            message: 'Enter last name of new employee:'
+                        },
+                        {
+                            name: 'title',
+                            type: 'input',
+                            message: 'Enter title of new employee:'
+                        }
+                    ]).then((answer) => {
+                        employeeDb.addNonReportingEmployee(answer.first, answer.last, answer.title);
+                        start(); // keep app running until user selects EXIT
+                    });
                     break;
                 case 'View all departments':
                     start();
