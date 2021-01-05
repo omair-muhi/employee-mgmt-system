@@ -51,7 +51,7 @@ class employeeDbConnection {
         });
     }
     addDepartment(name) {
-        console.log(`Adding ${name} department...\n`);
+        // console.log(`Adding ${name} department...\n`);
         const query = this.connection.query(
             'INSERT INTO department SET ?', {
                 name: name
@@ -62,10 +62,10 @@ class employeeDbConnection {
             }
         );
         // logs the actual query being run
-        console.log(query.sql);
+        // console.log(query.sql);
     }
     deleteDeparment(name) {
-        console.log(`Deleting ${name} deparment...\n`);
+        // console.log(`Deleting ${name} deparment...\n`);
         this.connection.query(
             'DELETE FROM department WHERE ?', {
                 name: name,
@@ -77,7 +77,7 @@ class employeeDbConnection {
         );
     }
     addRole(title, salary, departmentName) {
-        console.log(`Adding ${title} role...\n`);
+        // console.log(`Adding ${title} role...\n`);
         // query from department ID based on name
         this.connection.query('SELECT id FROM department WHERE ?', {
             name: departmentName
@@ -94,22 +94,22 @@ class employeeDbConnection {
                 },
                 (err, res) => {
                     if (err) throw err;
-                    console.log(`${res.affectedRows} role inserted!\n`);
+                    // console.log(`${res.affectedRows} role inserted!\n`);
                 }
             );
             // logs the actual query being run
-            console.log(query.sql);
+            // console.log(query.sql);
         });
     }
     deleteRole(title) {
-        console.log(`Deleting ${title} role...\n`);
+        // console.log(`Deleting ${title} role...\n`);
         this.connection.query(
             'DELETE FROM role WHERE ?', {
                 title: title,
             },
             (err, res) => {
                 if (err) throw err;
-                console.log(`${res.affectedRows} role(s) deleted!\n`);
+                // console.log(`${res.affectedRows} role(s) deleted!\n`);
             }
         );
     }
@@ -118,7 +118,7 @@ class employeeDbConnection {
             console.log("Please provide manager first and last name.");
             return;
         }
-        console.log(`Adding ${lastName}, ${firstName} employee...\n`);
+        // console.log(`Adding ${lastName}, ${firstName} employee...\n`);
         // query role_id by title
         this.connection.query('SELECT id FROM role WHERE ?', {
             title: title
@@ -143,7 +143,7 @@ class employeeDbConnection {
                         },
                         (err, res) => {
                             if (err) throw err;
-                            console.log(`${res.affectedRows} employee inserted!\n`);
+                            // console.log(`${res.affectedRows} employee inserted!\n`);
                         }
                     );
                 }
@@ -151,7 +151,7 @@ class employeeDbConnection {
         });
     }
     addNonReportingEmployee(firstName, lastName, title) {
-        console.log(`Adding ${lastName}, ${firstName} employee...\n`);
+        // console.log(`Adding ${lastName}, ${firstName} employee...\n`);
         // query role_id by title
         this.connection.query('SELECT id FROM role WHERE ?', {
             title: title
@@ -168,18 +168,18 @@ class employeeDbConnection {
                 },
                 (err, res) => {
                     if (err) throw err;
-                    console.log(`${res.affectedRows} employee inserted!\n`);
+                    // console.log(`${res.affectedRows} employee inserted!\n`);
                 }
             );
         });
     }
     deleteEmployee(firstName, lastName) {
-        console.log(`Deleting ${lastName},${firstName} employee...\n`);
+        // console.log(`Deleting ${lastName},${firstName} employee...\n`);
         this.connection.query(
             'DELETE FROM employee WHERE first_name=? AND last_name=?', [firstName, lastName],
             (err, res) => {
                 if (err) throw err;
-                console.log(`${res.affectedRows} employee(s) deleted!\n`);
+                // console.log(`${res.affectedRows} employee(s) deleted!\n`);
             }
         );
     }
@@ -200,7 +200,7 @@ class employeeDbConnection {
                     }],
                     (err, res) => {
                         if (err) throw err;
-                        console.log(`${res.affectedRows} employee updated!\n`);
+                        // console.log(`${res.affectedRows} employee updated!\n`);
                     }
                 );
             }
@@ -227,7 +227,7 @@ class employeeDbConnection {
                     }],
                     (err, res) => {
                         if (err) throw err;
-                        console.log(`${res.affectedRows} employee updated!\n`);
+                        // console.log(`${res.affectedRows} employee updated!\n`);
                     }
                 );
             }
