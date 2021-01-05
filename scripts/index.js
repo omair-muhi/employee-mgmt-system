@@ -7,7 +7,7 @@ const employeeDbConnection = require('./employeeDbConnection');
 const start = () => {
     inquirer
         .prompt({
-            name: 'mainScreen',
+            name: 'mainPrompt',
             type: 'list',
             message: 'What would you like to do?',
             choices: [
@@ -20,26 +20,64 @@ const start = () => {
                 'Delete department',
                 'Delete role',
                 'Delete employee',
+                'Update employee role',
+                'Update employee manager',
                 'EXIT'
             ],
         })
         .then((answer) => {
-            // based on their answer, either call the bid or the post functions
-            if (answer.mainScreen === 'Add department') {
-                console.log("Call add department");
-                start();
-            } else if (answer.mainScreen === 'Delete role') {
-                console.log("Call delete role");
-                start();
-            } else if (answer.mainScreen === 'EXIT') {
-                employeeDb.connection.end();
+            // process first-level main-prompt
+            switch (answer.mainPrompt) {
+                case 'Add department':
+                    inquirer.prompt([{
+                        name: 'deptName',
+                        type: 'input',
+                        message: 'Enter name of department:'
+                    }]).then((answer) => {
+                        employeeDb.addDepartment(answer.deptName);
+                        start(); // keep app running until user selects EXIT
+                    });
+                    break;
+                case 'Add role':
+                    start();
+                    break;
+                case 'Add employee':
+                    start();
+                    break;
+                case 'View all departments':
+                    start();
+                    break;
+                case 'View all roles':
+                    start();
+                    break;
+                case 'View all employees':
+                    start();
+                    break;
+                case 'Delete department':
+                    start();
+                    break;
+                case 'Delete role':
+                    start();
+                    break;
+                case 'Delete employee':
+                    start();
+                    break;
+                case 'Update employee role':
+                    start();
+                    break;
+                case 'Update employee manager':
+                    start();
+                    break;
+                case 'EXIT':
+                default:
+                    employeeDb.connection.end();
             }
         });
 };
-// connect to the mysql server and sql database
+// create a new DB object and connect to server
 const employeeDb = new employeeDbConnection();
 employeeDb.connection.connect((err) => {
     if (err) throw err;
-    // run the start function after the connection is made to prompt the user
+    // entry point of the CLI
     start();
 });
