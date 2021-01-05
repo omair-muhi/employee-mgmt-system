@@ -32,14 +32,32 @@ const start = () => {
                     inquirer.prompt([{
                         name: 'deptName',
                         type: 'input',
-                        message: 'Enter name of department:'
+                        message: 'Enter name of new department:'
                     }]).then((answer) => {
                         employeeDb.addDepartment(answer.deptName);
                         start(); // keep app running until user selects EXIT
                     });
                     break;
                 case 'Add role':
-                    start();
+                    inquirer.prompt([{
+                            name: 'title',
+                            type: 'input',
+                            message: 'Enter title of new role:'
+                        },
+                        {
+                            name: 'salary',
+                            type: 'number',
+                            message: 'Enter salary of new role:'
+                        },
+                        {
+                            name: 'department',
+                            type: 'input',
+                            message: 'Enter department of new role:'
+                        }
+                    ]).then((answer) => {
+                        employeeDb.addRole(answer.title, answer.salary, answer.department);
+                        start(); // keep app running until user selects EXIT
+                    });
                     break;
                 case 'Add employee':
                     start();
